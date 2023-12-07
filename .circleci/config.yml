@@ -1,4 +1,3 @@
-version: 2.1
 jobs:
   build-and-test:
     docker:
@@ -13,8 +12,9 @@ jobs:
           command: npm test
       - run:
           name: Generate Code Coverage Report & Save
-          command: mkdir /tmp/artifacts
-          command: npm run coverage > /tmp/artifacts
+          command: |
+            mkdir -p /tmp/artifacts
+            npm run coverage > /tmp/artifacts/coverage-report.txt
 
 workflows:
   version: 2
