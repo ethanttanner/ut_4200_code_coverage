@@ -19,7 +19,8 @@ jobs:
       - run:
           name: Generate Code Coverage
           command: npm run coverage
-          path: test-results/
+          command: mkdir /tmp/artifacts
+          path: /tmp/test-results
           destination: test-results/
 
       - store_artifacts:
