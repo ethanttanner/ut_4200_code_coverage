@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: Move Coverage Results to Artifacts Folder
-          command: mv coverage/* artifacts/
+          command: mv coverage artifacts/
 
       - persist_to_workspace:
           root: /tmp
