@@ -16,7 +16,7 @@ jobs:
           name: Generate Code Coverage Report
           command: npm run coverage
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: /artifacts
           paths:
             - test-results
             - coverage
