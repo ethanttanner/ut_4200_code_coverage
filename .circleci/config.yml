@@ -25,11 +25,6 @@ jobs:
           name: Generate Code Coverage Report
           command: npm run coverage
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
-
       - run:
         name: Creating Dummy Artifacts
         command: |
