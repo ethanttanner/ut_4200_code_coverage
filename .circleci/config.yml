@@ -32,7 +32,7 @@ jobs:
 
       - store_artifacts:
           path: coverage/
-          destination: coverage
+          destination: artifacts
 
       - store_test_results:
           path: junit.xml
