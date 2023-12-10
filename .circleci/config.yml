@@ -1,23 +1,35 @@
+version: 2.1
+
 jobs:
-  build-and-test:
+  build:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:latest
+
     steps:
       - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
+
       - run:
           name: Install Dependencies
           command: npm install
+
       - run:
           name: Run Unit Tests
           command: npm test
-      - run:
-          name: Generate Code Coverage Report & Save
-          command: |
-            mkdir -p /tmp/artifacts
-            npm run coverage > /tmp/artifacts/coverage-report.txt
 
-workflows:
-  version: 2
-  build-and-test-workflow:
-    jobs:
-      - build-and-test
+      - run:
+          name: Generate Code Coverage Report
+          command: npm run coverage
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+
+      - store_artifacts:
+          path: coverage/
+          destination: coverage
