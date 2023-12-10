@@ -8,14 +8,23 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Create Artifacts Folder
+          command: mkdir -p artifacts
+
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
 
       - run:
           name: Install Dependencies
           command: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: Run Unit Tests
@@ -25,15 +34,35 @@ jobs:
           name: Generate Code Coverage Report
           command: npm run coverage
 
-      - save_cache:
+      - run:
+          name: Move Coverage Results to Artifacts Folder
+          command: mv coverage/* artifacts/
+
+      - persist_to_workspace:
+          root: /tmp
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
+            - artifacts/
+
+  deploy:
+    docker:
+      - image: circleci/node:latest
+
+    steps:
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Save Artifacts
+          command: cp -R /tmp/artifacts /tmp/saved-artifacts
 
       - store_artifacts:
-          path: coverage/
-          destination: coverage
+          path: /tmp/saved-artifacts
 
-      - store_artifacts:
-          path: test-results/
-          destination: test-results
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
