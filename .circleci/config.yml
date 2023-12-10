@@ -39,30 +39,12 @@ jobs:
           command: mv coverage artifacts/
 
       - persist_to_workspace:
-          root: /tmp
+          root: .
           paths:
             - artifacts/
-
-  deploy:
-    docker:
-      - image: circleci/node:latest
-
-    steps:
-      - attach_workspace:
-          at: /tmp
-
-      - run:
-          name: Save Artifacts
-          command: cp -R /tmp/artifacts /tmp/saved-artifacts
-
-      - store_artifacts:
-          path: /tmp/saved-artifacts
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
