@@ -31,8 +31,8 @@ jobs:
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - store_artifacts:
-          path: coverage/
-          destination: artifacts
-
-      - store_test_results:
-          path: junit.xml
+            path: /tmp/art-1
+            destination: artifact-file
+      
+      - store_artifacts:
+          path: /tmp/artifacts
