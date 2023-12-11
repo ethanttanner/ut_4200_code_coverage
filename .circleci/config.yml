@@ -1,27 +1,16 @@
 version: 2.1
 
-workflows:
-  build-and-test:
-    jobs:
-      - build-and-test
-    triggers:
-      - schedule:
-        cron: "0 0 * * *"
-        filters:
-          - branches:
-            - master
-          - tags:
-            - release
-
 jobs:
   build-and-test:
     docker:
       - image: circleci/node:14
+
     steps:
       - checkout
       - run: npm install
       - run: npm test
       - run: npm run coverage
+
       - store_artifacts:
           path: coverage/
           prefix: coverage-report
