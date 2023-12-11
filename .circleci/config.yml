@@ -1,5 +1,12 @@
 version: 2.1
 
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test
+    triggers:
+      - manual
+
 jobs:
   build-and-test:
     executor: node:16.13
@@ -14,7 +21,3 @@ jobs:
       - store_test_results:
           path: test-results/
           prefix: test-results
-workflows:
-  build-and-test:
-    jobs:
-      - build-and-test
