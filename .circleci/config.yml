@@ -7,9 +7,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: artifacts
-          command: mkdir tmp/artifacts
-      - run:
           name: Install Dependencies
           command: npm install
       - run:
@@ -19,10 +16,7 @@ jobs:
           name: Generate Code Coverage Report
           command: npm run coverage
       - store_artifacts:
-          root: /tmp/artifacts
-          paths:
-            - test-results
-            - coverage
+          path: test-results
 
 workflows:
   version: 2
