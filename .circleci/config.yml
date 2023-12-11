@@ -5,7 +5,13 @@ workflows:
     jobs:
       - build-and-test
     triggers:
-      - schedule: {}
+  - schedule:
+      cron: "0 0 * * *"
+      filters:
+        - branches:
+          - master
+        - tags:
+          - release
 
 jobs:
   build-and-test:
