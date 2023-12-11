@@ -5,11 +5,12 @@ workflows:
     jobs:
       - build-and-test
     triggers:
-      - schedule: {}
+      - manual: {}
 
 jobs:
   build-and-test:
-    image: circleci/node:14
+    docker:
+      - image: circleci/node:14
     steps:
       - checkout
       - run: npm install
