@@ -1,33 +1,16 @@
 version: 2.1
 
 jobs:
-  build:
-    docker:
-      - image: circleci/node:14
+  build-and-test:
+    executor: node:16.13
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install
-          working_directory: /tmp
-      - run:
-          name: Create Artifacts Directory
-          command: mkdir /tmp/artifacts
-      - run:
-          name: Run Unit Tests
-          command: npm test
-      - run:
-          name: Generate Code Coverage Report
-          command: npm run coverage
-      - persist_to_workspace:
-          root: /tmp
-          paths:
-            - artifacts
-            - test-results
-            - coverage
-
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build
+      - run: npm install
+      - run: npm test
+      - run: npm run coverage
+      - store_artifacts:
+          path: coverage/
+          prefix: coverage-report
+      - store_test_results:
+          path: test-results/
+          prefix: test-results
