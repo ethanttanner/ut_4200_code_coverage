@@ -4,14 +4,14 @@ jobs:
   build:
     docker:
       - image: circleci/node:14
-    working_directory: /tmp
     steps:
       - checkout
       - run:
-          mkdir /tmp/artifacts;
-      - run:
           name: Install Dependencies
           command: npm install
+      working_directory: /tmp
+      - run:
+          mkdir /tmp/artifacts;
       - run:
           name: Run Unit Tests
           command: npm test
