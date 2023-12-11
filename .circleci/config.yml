@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: artifacts
-          command: mkdir /tmp/artifacts
+          command: mkdir tmp/artifacts
       - run:
           name: Install Dependencies
           command: npm install
