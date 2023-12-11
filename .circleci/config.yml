@@ -4,8 +4,11 @@ jobs:
   build:
     docker:
       - image: circleci/node:14
+    working_directory: /tmp
     steps:
       - checkout
+      - run:
+          mkdir /tmp/artifacts;
       - run:
           name: Install Dependencies
           command: npm install
@@ -16,7 +19,7 @@ jobs:
           name: Generate Code Coverage Report
           command: npm run coverage
       - store_artifacts:
-          path: test-results
+          path: /tmp/test-results
 
 workflows:
   version: 2
