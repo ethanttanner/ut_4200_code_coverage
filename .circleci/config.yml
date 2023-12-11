@@ -23,6 +23,8 @@ jobs:
           root: /tmp
           paths:
             - artifacts
+            - test-results
+            - coverage
 
 workflows:
   version: 2
