@@ -9,7 +9,7 @@ workflows:
 
 jobs:
   build-and-test:
-    executor: node:16.13
+    executor: circleci/node:14
     steps:
       - checkout
       - run: npm install
