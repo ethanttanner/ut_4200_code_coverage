@@ -17,3 +17,9 @@ jobs:
       - store_test_results:
           path: test-results/
           prefix: test-results
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build-and-test
