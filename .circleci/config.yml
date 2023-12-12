@@ -28,7 +28,7 @@ jobs:
             custom: |
               {
                 "type": "plain_text",
-                "text": "This is Ethan submitting the slack assignment",
+                "text": "This is Ethan Tanner submitting the Slack assignment",
                 "emoji": true
               }
             event: always
