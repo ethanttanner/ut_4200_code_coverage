@@ -10,13 +10,15 @@ jobs:
       - run: npm install
       - run: npm test
       - run: npm run coverage
-
-      - store_artifacts:
-          path: ./coverage
-          prefix: coverage-report
+      - run:
+        name: Create Test-Results Directory
+        command: mkdir -p ./test-results
       - store_test_results:
-          path: ./test-results
-          prefix: test-results
+        path: ./test-results
+        prefix: test-results
+      - store_artifacts:
+        path: ./coverage
+        prefix: coverage-report
 
 workflows:
   version: 2
