@@ -8,15 +8,15 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm test
-      - run: npm run coverage
-      - run: ls -la ./coverage
       - run: mkdir artifacts
 
       - store_artifacts:
+          run: npm run coverage
+          run: ls -la ./coverage
           path: artifacts/coverage  # Adjust the path based on where coverage reports are generated
           prefix: coverage-report
       - store_test_results:
+          run: npm test
           path: artifacts/test-results  # Adjust the path based on where test results are generated
           prefix: test-results
 
