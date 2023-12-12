@@ -33,12 +33,12 @@ jobs:
               }
             event: always
 
-
 workflows:
   send-notification:
     jobs:
-      - notify:
+      - notify-slack:
           context: slack-
+
   build-and-notify:
     jobs:
       - build
