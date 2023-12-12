@@ -10,6 +10,8 @@ jobs:
       - run: npm install
       - run: npm test
       - run: npm run coverage
+      - run: ls -la ./coverage
+      - run: ls -la ./test-results
 
       - store_artifacts:
           path: ./coverage  # Adjust the path based on where coverage reports are generated
