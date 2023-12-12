@@ -38,7 +38,7 @@ workflows:
   send-notification:
     jobs:
       - notify-slack:
-          context: slack-
+          context: slack-secrets
 
   build-and-notify:
     jobs:
