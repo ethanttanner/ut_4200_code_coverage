@@ -1,5 +1,3 @@
-version: 2.1
-
 orbs:
   slack: circleci/slack@4.2.0
 
@@ -16,22 +14,22 @@ jobs:
           name: Install Dependencies
           command: npm install
 
-    notify-slack:
-      docker:
-        - image: cimg/base:2021.10
+  notify-slack:
+    docker:
+      - image: cimg/base:2021.10
 
-      steps:
-        - run:
-            name: Notify Slack
+    steps:
+      - run:
+          name: Notify Slack
 
-        - slack/notify:
-            custom: |
-              {
-                "type": "plain_text",
-                "text": "This is Ethan Tanner submitting the Slack assignment",
-                "emoji": true
-              }
-            event: always
+      - slack/notify:
+          custom: |
+            {
+              "type": "plain_text",
+              "text": "This is Ethan Tanner submitting the Slack assignment",
+              "emoji": true
+            }
+          event: always
 
 workflows:
   send-notification:
