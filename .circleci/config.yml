@@ -27,7 +27,6 @@ jobs:
             echo "This is Ethan submitting the Slack assignment" > message.txt
             slack/notify:
               channel: general
-              file: message.txt
 
 workflows:
   version: 2
