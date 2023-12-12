@@ -37,9 +37,13 @@ jobs:
       - image: cimg/base:2021.10
 
     steps:
-      - slack/notify:
-          channel: general
-          message: "This is Ethan submitting the Slack assignment"
+      - run:
+          name: Notify Slack
+          command: |
+            echo "This is Ethan submitting the Slack assignment" > message.txt
+            slack/notify:
+              channel: general
+              file: message.txt
 
 workflows:
   version: 2
