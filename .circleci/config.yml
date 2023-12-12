@@ -1,30 +1,51 @@
 version: 2.1
 
+orbs:
+  slack: circleci/slack@4.2.0
+
 jobs:
-  build-and-test:
+  build:
     docker:
       - image: circleci/node:14
 
     steps:
       - checkout
+
+      # Install project dependencies
       - run:
-          name: Create Test-Results Directory
-          command: mkdir -p ./test-results
+          name: Install Dependencies
+          command: npm install
+
+      # Run unit tests
       - run:
-          name: Create coverage repository
-          command: mkdir -p ./coverage
-      - run: npm install
-      - run: npm test
-      - run: npm run coverage
+          name: Run Unit Tests
+          command: npm test
+
+      # Generate code coverage report
+      - run:
+          name: Generate Code Coverage
+          command: npm run coverage
+
+      # Store test results and coverage report as artifacts
       - store_test_results:
-          path: ./test-results
-          prefix: test-results
+          path: test-results
       - store_artifacts:
-          path: ./coverage
-          prefix: coverage-report
+          path: coverage
+
+  notify-slack:
+    docker:
+      - image: cimg/base:2021.10
+
+    steps:
+      - slack/notify:
+          channel: general
+          message: "This is Ethan submitting the Slack assignment"
 
 workflows:
   version: 2
-  build-and-test:
+  build-and-notify:
     jobs:
-      - build-and-test
+      - build
+      - notify-slack:
+          requires:
+            - build
