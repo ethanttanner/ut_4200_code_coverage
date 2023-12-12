@@ -6,13 +6,13 @@ jobs:
       - image: circleci/node:14
 
     steps:
+      - run:
+          name: Create Test-Results Directory
+          command: mkdir -p ./test-results
       - checkout
       - run: npm install
       - run: npm test
       - run: npm run coverage
-      - run:
-          name: Create Test-Results Directory
-          command: mkdir -p ./test-results
       - store_test_results:
           path: ./test-results
           prefix: test-results
