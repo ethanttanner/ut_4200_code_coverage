@@ -25,8 +25,12 @@ jobs:
           name: Notify Slack
           command: |
             echo "This is Ethan submitting the Slack assignment" > message.txt
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/CircleCI-Public/slack-orb/master/deploy.sh)"
             slack/notify:
               channel: general
+              file: message.txt
+              template: basic
+              event: fail
 
 workflows:
   version: 2
