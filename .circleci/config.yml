@@ -23,18 +23,28 @@ jobs:
     steps:
       - run:
           name: Notify Slack
-          command: |
-            echo "This is Ethan submitting the Orbs assignment" > message.txt
-            slack/notify:
-              channel: general
-              file: message.txt
-              template: basic
-              event: fail
+          
+          
+      - slack/notify:
+          custom: |
+            {
+                {
+                    {
+                      "type": "plain_text",
+                      "text": "This is Ethan submitting the slack assignment,
+                      "emoji": true
+                    }
+                }
+            }
+          event: always
+
 
 workflows:
-  version: 2
+  send-notification:
+    jobs:
+      - notify:
+          context: slack-
   build-and-notify:
     jobs:
       - build
-      - notify-slack:
-          webhook-url: https://hooks.slack.com/services/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
+      - notify-slack
