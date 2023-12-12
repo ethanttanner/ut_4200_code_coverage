@@ -16,17 +16,6 @@ jobs:
           name: Install Dependencies
           command: npm install
 
-      # Generate code coverage report
-      - run:
-          name: Generate Code Coverage
-          command: npm run coverage
-
-      # Store test results and coverage report as artifacts
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: coverage
-
   notify-slack:
     docker:
       - image: cimg/base:2021.10
