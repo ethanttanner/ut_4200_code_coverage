@@ -4,23 +4,23 @@ jobs:
   build-and-test:
     docker:
       - image: circleci/node:14
-    working_directory: /tmp
+
     steps:
       - checkout
       - run:
           name: Create Test-Results Directory
-          command: mkdir -p tmp/test-results
+          command: mkdir -p ./test-results
       - run:
           name: Create coverage repository
-          command: mkdir -p tmp/coverage
+          command: mkdir -p ./coverage
       - run: npm install
       - run: npm test
       - run: npm run coverage
       - store_test_results:
-          path: tmp/test-results
+          path: ./test-results
           prefix: test-results
       - store_artifacts:
-          path: tmp/coverage
+          path: ./coverage
           prefix: coverage-report
 
 workflows:
