@@ -16,27 +16,22 @@ jobs:
           name: Install Dependencies
           command: npm install
 
-  notify-slack:
-    docker:
-      - image: cimg/base:2021.10
+    notify-slack:
+      docker:
+        - image: cimg/base:2021.10
 
-    steps:
-      - run:
-          name: Notify Slack
-          
-          
-      - slack/notify:
-          custom: |
-            {
-                {
-                    {
-                      "type": "plain_text",
-                      "text": "This is Ethan submitting the slack assignment,
-                      "emoji": true
-                    }
-                }
-            }
-          event: always
+      steps:
+        - run:
+            name: Notify Slack
+
+        - slack/notify:
+            custom: |
+              {
+                "type": "plain_text",
+                "text": "This is Ethan submitting the slack assignment",
+                "emoji": true
+              }
+            event: always
 
 
 workflows:
