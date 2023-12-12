@@ -12,10 +12,10 @@ jobs:
       - run: npm run coverage
 
       - store_artifacts:
-          path: coverage/
+          path: ./coverage  # Adjust the path based on where coverage reports are generated
           prefix: coverage-report
       - store_test_results:
-          path: test-results/
+          path: ./test-results  # Adjust the path based on where test results are generated
           prefix: test-results
 
 workflows:
