@@ -37,6 +37,4 @@ workflows:
     jobs:
       - build
       - notify-slack:
-          channel: '#general'  # Replace with your Slack channel name
-          event: fail
           webhook-url: https://hooks.slack.com/services/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
