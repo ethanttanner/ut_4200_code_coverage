@@ -35,9 +35,3 @@ workflows:
       - notify-slack:
           context: slack-secrets
 
-  build-and-notify:
-    jobs:
-      - build
-      - notify-slack
-
-
