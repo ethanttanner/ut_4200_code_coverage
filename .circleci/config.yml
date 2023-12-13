@@ -2,9 +2,18 @@ version: 2.1
 orbs:
   slack: circleci/slack@4.9.3
 jobs:
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+
   notify-slack:
     docker:
-      - image: cimg/base:2021.10
+      - image: 'cimg/base:stable'
     steps:
       - run:
         name: Notify Slack
