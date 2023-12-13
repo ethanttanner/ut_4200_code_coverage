@@ -44,4 +44,3 @@ workflows:
     jobs:
       - build
       - notify-slack
-      
