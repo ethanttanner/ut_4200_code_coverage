@@ -7,11 +7,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:14
-
     steps:
       - checkout
-
-      # Install project dependencies
       - run:
           name: Install Dependencies
           command: npm install
@@ -19,7 +16,6 @@ jobs:
   notify-slack:
     docker:
       - image: cimg/base:2021.10
-
     steps:
       - run:
           name: Notify Slack
@@ -29,12 +25,12 @@ jobs:
               "text": "This is Ethan Tanner submitting the Slack assignment",
               "emoji": true
             }' > slack_message.json
-
       - slack/notify:
           custom: cat slack_message.json
           event: always
 
 workflows:
+  version: 2
   send-notification:
     jobs:
       - notify-slack:
@@ -43,5 +39,4 @@ workflows:
   build-and-notify:
     jobs:
       - build
-      - notify-slack:
-          context: slack-secrets
+      - notify-slack
