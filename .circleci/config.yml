@@ -2,9 +2,9 @@ version: 2.1
 orbs:
   slack: circleci/slack@4.9.3
 jobs:
-  build:
+  notify:
     docker:
-      - image: circleci/node:14
+      - image: 'cimg/base:stable'
     steps:
       - checkout
       - run:
